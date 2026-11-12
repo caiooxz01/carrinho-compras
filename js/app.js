@@ -6,15 +6,21 @@ function adicionar() {
     let nomeDoProduto = textoDoProduto[0];
     let valor = parseInt(textoDoProduto[1]);  
     let quantidade = parseInt(document.getElementById('quantidade').value);
-    totalDaCompra += (valor * quantidade);
-
-    let carrinhoDeCompras = document.getElementById('lista-produtos');
-    carrinhoDeCompras.innerHTML += `<section class="carrinho__produtos__produto">
-          <span class="texto-azul">${quantidade}x</span> ${nomeDoProduto} <span class="texto-azul">R$${valor}</span>
+    let subTotal = quantidade * valor;
+    
+    if (quantidade > 0) {
+        let carrinhoDeCompras = document.getElementById('lista-produtos');
+        carrinhoDeCompras.innerHTML += `<section class="carrinho__produtos__produto">
+        <span class="texto-azul">${quantidade}x</span> ${nomeDoProduto} <span class="texto-azul">R$${subTotal}</span>
         </section>`;
-
-    let totalCarrinhoDeCompras = document.getElementById('valor-total');    
-    totalCarrinhoDeCompras.innerHTML = `<span>R$${totalDaCompra}</span>`;
+        
+        totalDaCompra += (valor * quantidade);
+        let totalCarrinhoDeCompras = document.getElementById('valor-total');    
+        totalCarrinhoDeCompras.innerHTML = `<span>R$${totalDaCompra}</span>`;
+    } else {
+        alert('Digite uma quantidade válida');
+        return;
+    };
     document.getElementById('quantidade').value = 0
 };
 
